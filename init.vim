@@ -24,7 +24,7 @@
 " ===
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    \ https://raw.githubusercontent.com/willer94/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -39,42 +39,90 @@ endif
 let &t_ut=''
 set autochdir
 
+set encoding=UTF-8
 
 " ===
 " === Editor behavior
 " ===
+" -------------line and cursor -------------
+" set line number 
 set number
+" set relative line number 
 set relativenumber
+" set cursor line
 set cursorline
+
+" -------------tab and space-----------
+" set tab to n (softtabstop) space
 set expandtab
+" tabstop only change view width
 set tabstop=4
+" autoindent width
 set shiftwidth=4
 set softtabstop=4
-set list
+
+"--------------hidden characters----------
+" show hidden characters
+set list " set nolist
+" set tab and trail characters
 set listchars=tab:▸\ ,trail:▫
+
+" cursor and buffer distance keep 5 line
 set scrolloff=5
+
+"------------time delay------------
+" key code delays
 set ttimeoutlen=0
-set notimeout
+" mapping delays, default is 1000
+set timeoutlen=300
+
+" recover states of last time open
 set viewoptions=cursor,folds,slash,unix
-set wrap
+" auto line breaks when exceed screen
+set wrap " nowrap
+" set testwidth
 set tw=0
+" no indent by expression
 set indentexpr=
-set foldmethod=indent
+
+"-------------fold-----------
+set foldmethod=indent "manual indent expr mark syntax
 set foldlevel=99
+
+" add comment prefix when o/O on command line and
+" open new line in insert mode
 set formatoptions-=tc
+
+" open new buffer on right and below
 set splitright
 set splitbelow
+" open mouse or set mouse-=a
 set mouse=a
+
+"-----------show ------------
 set noshowmode
 set showcmd
+
 " set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
+" 增强模式中的命令行自动完成操作
 set wildmenu
+
+"-----------search----------
+" no highlight when open a new file
 exec "nohlsearch"
+" case
 set ignorecase
 set smartcase
+
+" don't give |ins-completion-menu| messages.
 set shortmess+=c
+
+" "nosplit": Shows the effects of a command incrementally, as you type.
+" "split"	 : Also shows partial off-screen results in a preview window.
 set inccommand=split
 set ttyfast "should make scrolling faster
+
+" 不要在宏的中间重绘屏幕。使它们更快完成
 set lazyredraw "same as above
 set visualbell
 silent !mkdir -p ~/.config/nvim/tmp/backup
@@ -125,15 +173,16 @@ map <LEADER>st :Startify<CR>
 inoremap <C-l> <C-u>
 
 " 大写JKHL重复五次执行
-noremap J 5j
-noremap K 5k
-noremap H 5h
-noremap L 5l
+"noremap J 5j
+"noremap K 5k
+"noremap H 5h
+"noremap L 5l
+
 " Copy to system clipboard
 vnoremap Y :w !xclip -i -sel c<CR>
 
 " Joining lines
-noremap H J
+"noremap H J
 
 " Indentation
 nnoremap < <<
@@ -159,6 +208,7 @@ map <LEADER>k <C-w>k
 map <LEADER>j <C-w>j
 map <LEADER>h <C-w>h
 map <LEADER>l <C-w>l
+map <LEADER>wo <C-w>o
 
 " Disabling the default s key
 noremap s <nop>
@@ -176,13 +226,13 @@ map <left> :vertical resize-5<CR>
 map <right> :vertical resize+5<CR>
 
 " Place the two screens up and down
-noremap sh <C-w>t<C-w>K
+noremap sb <C-w>t<C-w>K
 " Place the two screens side by side
 noremap sv <C-w>t<C-w>H
 
 " Rotate screens
-noremap srh <C-w>b<C-w>K
-noremap srv <C-w>b<C-w>H
+noremap ssb <C-w>b<C-w>K
+noremap ssv <C-w>b<C-w>H
 
 
 " ===
@@ -197,6 +247,17 @@ map td :tabclose<CR>
 " Move the tabs with tmn and tmi
 map tmn :-tabmove<CR>
 map tmi :+tabmove<CR>
+
+
+" ===
+" === Tab management
+" ===
+map <LEADER>bc :new<CR>
+map <LEADER>bp :bp<CR>
+map <LEADER>bn :bn<CR>
+map <LEADER>bf :bfirst<CR>
+map <LEADER>bl :blast<CR>
+map <LEADER>bd :bdelete<CR>
 
 " sudo vim
 map <LEADER>sudo :w !sudo tee %
@@ -236,7 +297,7 @@ autocmd BufEnter * silent! lcd %:p:h
 map tx :r !figlet
 
 " Compile function
-map r :call CompileRunGcc()<CR>
+map <LEADER>r :call CompileRunGcc()<CR>
 func! CompileRunGcc()
   exec "w"
   if &filetype == 'c'
@@ -281,20 +342,20 @@ endfunc
 
 call plug#begin('~/.config/nvim/plugged')
 
-" Testing my own plugin
-Plug 'theniceboy/vim-calc'
-
 " Pretty Dress
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
 Plug 'liuchengxu/space-vim-theme'
+Plug 'tomasr/molokai'
+Plug 'ryanoasis/vim-devicons'
 
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'ctrlpvim/ctrlp.vim', { 'on': 'CtrlP' }
-Plug '/usr/local/opt/fzf'
+"Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Taglist
@@ -306,6 +367,7 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 " Auto Complete
 "Plug 'Valloric/YouCompleteMe'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'davidhalter/jedi-vim'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'ncm2/ncm2'
@@ -347,6 +409,8 @@ Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'tamlok/vim-markdown'
+Plug 'joker1007/vim-markdown-quote-syntax'
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'dkarter/bullets.vim', { 'for' :['markdown', 'vim-plug'] }
 
@@ -369,12 +433,16 @@ Plug 'tmhedberg/SimpylFold'
 "Plug 'vim-scripts/restore_view.vim'
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'ryanoasis/vim-devicons'
+" header
+Plug 'alpertuna/vim-header'
 
 " Dependencies
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'kana/vim-textobj-user'
 Plug 'roxma/nvim-yarp'
 
+" sublime multi line cursors
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 " ===
@@ -394,14 +462,17 @@ source ~/.config/nvim/_machine_specific.vim
 set termguicolors     " enable true colors support
 let g:space_vim_transp_bg = 1
 "set background=dark
-colorscheme space_vim_theme
+"colorscheme space_vim_theme
+colorscheme molokai
+let g:rehash256 = 1
 
 " ===================== Start of Plugin Settings =====================
 
 " ===
 " === Airline
 " ===
-let g:airline_theme='dracula'
+"let g:airline_theme='dracula'
+let g:airline_theme='molokai'
 let g:airline#extensions#coc#enabled = 0
 let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#tabline#enabled = 0
@@ -491,7 +562,7 @@ let g:NERDTreeIndicatorMapCustom = {
 silent! au BufEnter * silent! unmap if
 "au TextChangedI * GitGutter
 " Installing plugins
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-snippets', 'coc-emmet', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-java' , 'coc-ccls']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-snippets', 'coc-emmet', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-ccls']
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -508,7 +579,27 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
+nmap <LEADER>rn <Plug>(coc-rename)
+
+"< Mappings using CoCList:
+" Show Files
+nnoremap <silent> <LEADER>lf  :<C-u>CocList files<cr>
+" Show all diagnostics.
+nnoremap <silent> <LEADER>la  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <LEADER>le  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <LEADER>lc  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <LEADER>lo  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <LEADER>ls  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <LEADER>lj  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <LEADER>lk  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <LEADER>lp  :<C-u>CocListResume<CR>
 
 " ===
 " === indentLine
@@ -558,7 +649,7 @@ let g:mkdp_page_title = '「${name}」'
 " ===
 let g:python_highlight_all = 1
 " let g:python_slow_sync = 0
-
+let g:semshi#self_to_attribute = 1
 
 " ===
 " === Taglist
@@ -575,7 +666,7 @@ map <LEADER>tm :TableModeToggle<CR>
 " ===
 " === FZF
 " ===
-map <C-p> :FZF<CR>
+map <C-j> :FZF<CR>
 
 
 " ===
@@ -648,15 +739,6 @@ let g:startify_lists = [
 " ===
 nnoremap <silent> <LEADER>f :F  %<left><left>
 
-" ===
-" === vim-calc
-" ===
-map <LEADER>a :call Calc()<CR>
-" Testing
-"if !empty(glob('~/Github/vim-calc/vim-calc.vim'))
-  "source ~/Github/vim-calc/vim-calc.vim
-"endif
-
 
 " ===
 " === emmet
@@ -670,7 +752,27 @@ let g:user_emmet_leader_key='<C-f>'
 let g:bullets_set_mappings = 0
 
 
-" ===================== End of Plugin Settings =====================
+" ===
+" === multi_cursor.vim
+" ===
+let g:multi_cursor_use_default_mapping=0
+
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+
+" Header 
+let g:header_auto_add_header = 1
+let g:header_field_author = 'WangZi'
+let g:header_author_email = 'wangzitju@163.com'
+
+"" ===================== End of Plugin Settings =====================
 
 " Open the _machine_specific.vim file if it has just been created
 if has_machine_specific_file == 0
