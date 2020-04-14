@@ -1,3 +1,8 @@
+" File              : init.vim
+" Author            : WangZi
+" Date              : 14.04.2020
+" Last Modified Date: 14.04.2020
+" Last Modified By  : WangZi
 "  __  __        __     _____ __  __ ____   ____
 " |  \/  |_   _  \ \   / /_ _|  \/  |  _ \ / ___|
 " | |\/| | | | |  \ \ / / | || |\/| | |_) | |
@@ -250,10 +255,10 @@ map tmi :+tabmove<CR>
 
 
 " ===
-" === Tab management
+" === Bufer management
 " ===
 map <LEADER>bc :new<CR>
-map <LEADER>bp :bp<CR>
+map <LEADER>bb :bp<CR>
 map <LEADER>bn :bn<CR>
 map <LEADER>bf :bfirst<CR>
 map <LEADER>bl :blast<CR>
