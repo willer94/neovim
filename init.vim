@@ -1,7 +1,7 @@
 " File              : init.vim
 " Author            : WangZi
 " Date              : 14.04.2020
-" Last Modified Date: 14.04.2020
+" Last Modified Date: 16.04.2020
 " Last Modified By  : WangZi
 "  __  __        __     _____ __  __ ____   ____
 " |  \/  |_   _  \ \   / /_ _|  \/  |  _ \ / ___|
@@ -263,6 +263,21 @@ map <LEADER>bn :bn<CR>
 map <LEADER>bf :bfirst<CR>
 map <LEADER>bl :blast<CR>
 map <LEADER>bd :bdelete<CR>
+
+command! BcloseOthers call <SID>BufCloseOthers()
+function! <SID>BufCloseOthers()
+   let l:currentBufNum   = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
+   for i in range(1,bufnr("$"))
+     if buflisted(i)
+       if i!=l:currentBufNum
+         execute("bdelete ".i)
+       endif
+     endif
+   endfor
+endfunction
+map <LEADER>bdd :BcloseOthers<cr>
+
 
 " sudo vim
 map <LEADER>sudo :w !sudo tee %
@@ -773,9 +788,10 @@ let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
 " Header 
-let g:header_auto_add_header = 1
+let g:header_auto_add_header = 0
 let g:header_field_author = 'WangZi'
 let g:header_author_email = 'wangzitju@163.com'
+map <F4> :AddHeader<CR>
 
 "" ===================== End of Plugin Settings =====================
 
