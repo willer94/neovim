@@ -160,7 +160,7 @@ autocmd TermOpen term://* startinsert
 " ===
 " Set <LEADER> as <SPACE>, ; as :
 let mapleader=" "
-map ; :
+"map ; :
 
 " Save & quit
 map Q :q<CR>
@@ -305,7 +305,7 @@ noremap <C-s> ea<C-x>s
 inoremap <C-s> <Esc>ea<C-x>s
 
 " Press ` to change case (instead of ~)
-map ` ~
+"map ` ~
 
 imap <C-c> <Esc>zza
 nmap <C-c> zz
@@ -402,9 +402,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mbbill/undotree/'
 
 " Other visual enhancement
-"Plug 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 "Plug 'itchyny/vim-cursorword'
-"Plug 'tmhedberg/SimpylFold'
+Plug 'tmhedberg/SimpylFold'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
 
@@ -463,6 +463,10 @@ Plug 'roxma/nvim-yarp'
 
 " sublime multi line cursors
 Plug 'terryma/vim-multiple-cursors'
+
+" latex
+Plug 'vim-latex/vim-latex'
+"Plug 'lervag/vimtex'
 call plug#end()
 
 " ===
@@ -627,6 +631,7 @@ nnoremap <silent> <LEADER>lp  :<C-u>CocListResume<CR>
 let g:indentLine_char = '│'
 let g:indentLine_color_term = 238
 let g:indentLine_color_gui = '#333333'
+let g:indentLine_fileTypeExclude = ['markdown', 'tex']
 silent! unmap <LEADER>ig
 autocmd WinEnter * silent! unmap <LEADER>ig
 
@@ -800,3 +805,4 @@ if has_machine_specific_file == 0
   exec "e ~/.config/nvim/_machine_specific.vim"
 endif
 
+"autocmd Filetype tex setlocal conceallevel=0
