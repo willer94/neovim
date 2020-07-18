@@ -238,4 +238,13 @@ Press `Space` + `a` to calculate the equation in the current line
 |_| |_|\___|_|_|\___/
 ```
 
+## vim-terminal-help
+- ALT + =: toggle terminal below.
+- ALT + SHIFT + h: move to the window on the left.
+- ALT + SHIFT + l: move to the window on the right.
+- ALT + SHIFT + j: move to the window below.
+- ALT + SHIFT + k: move to the window above.
+- ALT + SHIFT + p: move to the previous window.
+- ALT + -: paste register 0 to terminal.
+- ALT + q: switch to terminal normal mode.
 

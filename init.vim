@@ -453,6 +453,7 @@ Plug 'tmhedberg/SimpylFold'
 "Plug 'vim-scripts/restore_view.vim'
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'ryanoasis/vim-devicons'
+Plug 'skywind3000/vim-terminal-help'
 " header
 Plug 'alpertuna/vim-header'
 
