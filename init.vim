@@ -42,7 +42,8 @@ endif
 " ===
 "set clipboard=unnamed
 let &t_ut=''
-set autochdir
+"set autochdir
+set noautochdir
 
 set encoding=UTF-8
 
@@ -165,6 +166,9 @@ let mapleader=" "
 " Save & quit
 map Q :q<CR>
 map S :w<CR>
+
+" change workdir to pwd
+nnoremap <silent> <LEADER>. : cd %:p:h<CR>
 
 " Open the vimrc file anytime
 map <LEADER>rc :e ~/.config/nvim/init.vim<CR>
@@ -311,7 +315,7 @@ imap <C-c> <Esc>zza
 nmap <C-c> zz
 
 " Auto change directory to current dir
-autocmd BufEnter * silent! lcd %:p:h
+"autocmd BufEnter * silent! lcd %:p:h
 
 " Call figlet
 map tx :r !figlet
@@ -377,6 +381,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
 
 " Taglist
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
@@ -396,7 +402,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'ncm2/ncm2-bufword'
 "Plug 'ncm2/ncm2-path'
 "Plug 'ncm2/ncm2-match-highlight'
-"Plug 'ncm2/ncm2-markdown-subscope'
+"Plug 'ncm2/ncm2-markdown-su bscope'
 
 " Undo Tree
 Plug 'mbbill/undotree/'
@@ -587,7 +593,9 @@ let g:NERDTreeIndicatorMapCustom = {
 silent! au BufEnter * silent! unmap if
 "au TextChangedI * GitGutter
 " Installing plugins
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-snippets', 'coc-emmet', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-ccls']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-snippets', 'coc-pyright', 'coc-html', 'coc-json',
+                             \ 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-ccls', 
+                             \ 'coc-cmake', 'coc-marketplace', 'coc-project']
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -692,8 +700,13 @@ map <LEADER>tm :TableModeToggle<CR>
 " ===
 " === FZF
 " ===
-map <C-j> :FZF<CR>
+map <LEADER>fz :FZF<CR>
 
+" ===
+" === ranger
+" ===
+let g:ranger_map_keys = 0
+map <LEADER>ra :Ranger<CR>
 
 " ===
 " === vim-signature
@@ -742,7 +755,7 @@ let g:multi_cursor_start_key           = 'g<c-k>'
 let g:multi_cursor_select_all_key      = 'g<a-k>'
 let g:multi_cursor_next_key            = '<c-k>'
 let g:multi_cursor_prev_key            = '<c-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_skip_key            = '<c-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
 
@@ -796,7 +809,7 @@ let g:multi_cursor_quit_key            = '<Esc>'
 " Header 
 let g:header_auto_add_header = 0
 let g:header_field_author = 'WangZi'
-let g:header_author_email = 'wangzitju@163.com'
+let g:header_field_author_email = 'wangzitju@163.com'
 map <F4> :AddHeader<CR>
 
 "" ===================== End of Plugin Settings =====================
