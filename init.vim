@@ -422,8 +422,9 @@ Plug 'gisphm/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 Plug 'elzr/vim-json'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
+Plug 'neoclide/jsonc.vim'
+"Plug 'hail2u/vim-css3-syntax'
+"Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
 Plug 'mattn/emmet-vim'
@@ -526,6 +527,11 @@ let g:airline_mode_map = {
       \ '' : 'S',
       \ }
 
+" ===
+" === NERDCommenter
+" ===
+let g:NERDDefaultAlign = 'left'
+
 
 " ===
 " === NERDTree
@@ -593,9 +599,9 @@ let g:NERDTreeIndicatorMapCustom = {
 silent! au BufEnter * silent! unmap if
 "au TextChangedI * GitGutter
 " Installing plugins
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-snippets', 'coc-pyright', 'coc-html', 'coc-json',
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-snippets', 'coc-html', 'coc-json',
                              \ 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-ccls', 
-                             \ 'coc-cmake', 'coc-marketplace', 'coc-project']
+                             \ 'coc-cmake', 'coc-marketplace', 'coc-project', 'coc-prettier']
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
   let col = col('.') - 1

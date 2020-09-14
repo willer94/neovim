@@ -1,14 +1,19 @@
 {
+    "json.format.enable": true,
+    "python.pythonPath":"/home/willer/anaconda3/bin/python",
+    "python.linting.pylintEnabled":false,
+    "python.linting.flake8Enabled":true,
+    "coc.preferences.formatOnSaveFiletypes":["python"],
     "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-      "initializationOptions": {
-         "cache": {
-           "directory": ".ccls-cache"
-         }
-       }
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+            "initializationOptions": { 
+                "cache": {
+                "directory": ".ccls-cache" 
+                }
+            }
+        }
     }
-  }
 }
