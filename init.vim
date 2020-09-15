@@ -298,7 +298,7 @@ source ~/.config/nvim/snippits.vim
 " ===
 
 " Opening a terminal window
-map <LEADER>/ :set splitbelow<CR>:sp<CR>:term<CR>
+noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
 map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4i
@@ -491,9 +491,9 @@ source ~/.config/nvim/_machine_specific.vim
 " ===
 " === Dress up my vim
 " ===
-set termguicolors     " enable true colors support
+"set termguicolors     " enable true colors support
 let g:space_vim_transp_bg = 1
-"set background=dark
+set background=dark
 "colorscheme space_vim_theme
 colorscheme molokai
 let g:rehash256 = 1
