@@ -298,7 +298,9 @@ source ~/.config/nvim/snippits.vim
 " ===
 
 " Opening a terminal window
-noremap <LEADER>/ :set splitbelow<CR>:split<CR>:res +10<CR>:term<CR>
+"map <LEADER>/ :set splitbelow<CR>:sp<CR>:term<CR>
+
+map <LEADER>/ :set splitbelow<CR>:split<CR>:res -10<CR>:term<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
 map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4i
